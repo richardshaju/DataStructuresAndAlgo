@@ -68,7 +68,7 @@ public class DoublyLinkedList {
         DList.addNode(500);
         DList.addNode(5000);
         DList.addNode(50000);
-        DList.deleteNode(50);
+        DList.deleteNode(50 );
         DList.display();
     }
 }
