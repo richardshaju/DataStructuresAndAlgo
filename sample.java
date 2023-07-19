@@ -1,62 +1,105 @@
 public class sample {
 
-    public static class Node {
+    class Node {
         int data;
-        Node next;
+        Node right, left;
 
         Node(int data) {
             this.data = data;
         }
     }
 
-    public static Node head = null;
-    public static Node tail = null;
+    public static Node root = null;
 
-    public static void addNode(int data) {
-        Node newNode = new Node(data);
-        if (head == null) {
-            head = newNode;
-        }else{
-            tail.next = newNode;
+    public void addNode(int data) {
+        Node current = root;
+        if (root == null) {
+            root = new Node(data);
+            return;
+        } else {
+            while (true) {
+                if (data > current.data) {
+                    if (current.right == null) {
+                        current.right = new Node(data);
+                        break;
+                    } else {
+                        current = current.right;
+                    }
+                } else {
+                    if (current.left == null) {
+                        current.left = new Node(data);
+                        break;
+                    } else {
+                        current = current.left;
+                    }
+                }
+            }
         }
-        tail = newNode;
     }
-    public static void deleteNode(int data){
-        Node temp = head;
-        Node prev = null;
-        if(temp != null && temp.data == data){
-            head = temp.next;
-            return;
-        }
-        while(temp.data != data){
-            prev = temp;
-            temp = temp.next;
-        }
-        if(temp == tail){
-            tail = prev;
-            return;
-        }
-        prev.next = temp.next;
+
+    public void display() {
+        helperDisplay(root);
     }
-    public static void display(){
-        Node temp = head;
-        if(head == null){
-            System.out.println("Empty");
-            return;
+
+    public void helperDisplay(Node current) {
+        if (current != null) {
+            helperDisplay(current.left);
+            System.out.print(current.data + " ");
+            helperDisplay(current.right);
         }
-        while(temp != null){
-            System.out.println(temp.data);
-            temp = temp.next;
+    }
+
+    public void remove(int data) {
+        removeHelper(data, root);
+    }
+
+    public Node removeHelper(int data, Node root) {
+
+        if (data < root.data) {
+            root.left = removeHelper(data, root.left);
+
+        } else if (data > root.data) {
+            root.right = removeHelper(data, root.right);
+        } else {
+            if (root.right == null && root.left == null) {
+                return null;
+            } else if (root.left == null) {
+                return root.right;
+            } else if (root.right == null) {
+                return root.left;
+            } else {
+                Node MinValue = getMinValue(root.right);
+                root.data = MinValue.data;
+                root.right = removeHelper(root.data,root.right);
+            }
+        }
+
+        return root;
+    }
+
+    public Node getMinValue(Node root) {
+        if (root.left == null) {
+            return root;
+        } else {
+            return getMinValue(root.left);
         }
     }
 
     public static void main(String[] args) {
-        addNode(5);
-        addNode(34);
-        addNode(332);
-        addNode(8);
-        addNode(9);
-        addNode(98);
-        display();
+        sample tree = new sample();
+
+        tree.addNode(21);
+        tree.addNode(32);
+        tree.addNode(69);
+        tree.addNode(210);
+        tree.addNode(2);
+        
+        tree.display();
+        System.out.println();
+        tree.remove(21);
+        tree.remove(69);
+        tree.remove(2);
+
+        tree.display();
     }
 }
