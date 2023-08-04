@@ -43,61 +43,52 @@ public class BinarySearchTree {
         }
     }
 
+  
     public void remove(int data) {
-        if (data == root.data) {
-            if (root.right == null) {
-                root = root.left;
-            } else if (root.left == null) {
-                root = root.right;
-            } else {
-                Node minValue = getMinValue(root.right);
-                root.data = minValue.data;
-                root.right = removeHelper(minValue, data);
-            }
-        } else {
-
-            removeHelper(root, data);
-        }
+        removeHelper(root, data);
     }
 
-    public Node removeHelper(Node root, int value) {
-        if (value < root.data) {
-            root.left = removeHelper(root.left, value);
-        } else if (value > root.data) {
-            root.right = removeHelper(root.right, value);
+    public Node removeHelper(Node current, int data) {
+        if (current == null) {
+            return null;
+        }
+        if (current.data < data) {
+            current.right = removeHelper(current.right, data);
+        } else if (current.data > data) {
+            current.left = removeHelper(current.left, data);
         } else {
-            if (root.left == null && root.right == null) {
-                return null;
-
-            }
-            if (root.left == null) {
-                return root.right;
-            } else if (root.right == null) {
-                return root.left;
-            } else {
-                Node minValue = getMinValue(root.right);
-                root.data = minValue.data;
-                root.right = removeHelper(minValue, value);
+            
+            if (current.right == null) {
+                return current.left;
+            } else if (current.left == null) {
+                return current.right;
+            }else{
+                Node minVal = minValue(current.right);
+                current.data = minVal.data;
+                current.right = removeHelper(minVal, data);
             }
         }
-        return root;
+
+        return current;
     }
 
-    public Node getMinValue(Node root) {
-        if (root.left == null) {
-            return root;
-        } else {
-            return getMinValue(root.left);
+    private Node minValue(Node current){
+        if(current.left != null){
+            return minValue(current.left);
+        }else{
+            return current;
         }
-
     }
-
-    public void findMax() {
-        Node current = root;
-        while (current.right != null) {
-            current = current.right;
+    public void findMax(){
+        findMaxHelper(root);
+    }
+    public void findMaxHelper(Node current) {
+        if(current.right != null){
+            findMaxHelper(current.right);
+        }else{
+            System.out.println("Max Value :" +  current.data);
         }
-        System.out.println("Max Value = " + current.data);
+
     }
 
     public void sum() {
@@ -117,14 +108,14 @@ public class BinarySearchTree {
 
     public static void main(String[] args) {
         BinarySearchTree tree = new BinarySearchTree();
-        int[] values = { 1, 2, 3};
+        int[] values = { 1, 2, 3,4,5,6,5050};
         for (int i = 0; i < values.length; i++) {
             root = tree.insert(values[i]);
         }
         tree.display();
         System.out.println();
         tree.findMax();
-
+        tree.remove(5050);
         tree.display();
         tree.findMax();
         tree.sum();

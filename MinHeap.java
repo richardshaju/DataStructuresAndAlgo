@@ -16,7 +16,7 @@ public class MinHeap {
         heap = array;
         buildHeap(heap, 0);
     }
-
+    
     public void sort() {
         for (int i = 0; i <= heap.size() - 1; i++) {
             buildHeap(heap,i);
