@@ -1,3 +1,4 @@
+package Java;
 public class sample {
 
     public static void quickSort(int[] array, int low, int high) {

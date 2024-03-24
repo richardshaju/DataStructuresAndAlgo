@@ -1,4 +1,5 @@
-import BinarySearchTree.Node;
+package Java;
+import Java.BinarySearchTree.Node;
 
 public class Trie_1 {
     class TrieNode{

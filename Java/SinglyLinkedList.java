@@ -1,3 +1,4 @@
+package Java;
 public class SinglyLinkedList {
     class Node{
         int data;

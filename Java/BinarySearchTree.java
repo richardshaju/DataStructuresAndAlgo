@@ -1,3 +1,4 @@
+package Java;
 public class BinarySearchTree {
     class Node {
         int data;

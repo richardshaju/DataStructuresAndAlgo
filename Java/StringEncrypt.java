@@ -1,3 +1,4 @@
+package Java;
 public class StringEncrypt {
 
     public static String change(String str, int key) {
