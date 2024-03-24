@@ -1,7 +1,4 @@
 // Divide without  /, *, % operators
-
-import java.util.function.IntToLongFunction;
-
 public class BitManipulation {
 
     public static int Divide(int dividend, int divisor) {
@@ -31,11 +28,11 @@ public class BitManipulation {
             result += 1<<shift;
         }
 
-        return result;
+        return isNegative ? -result : result ;
     }
 
     public static void main(String[] args) {
-        System.out.println(Divide(0,564));
+        System.out.println(Divide(25,-5));
     }
 
 }

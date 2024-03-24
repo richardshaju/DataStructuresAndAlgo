@@ -55,7 +55,7 @@ public class QuickSort {
 
     // Driver Code
     public static void main(String[] args) {
-        int[] arr = { 1, 5, 8, 3, 0 };
+        int[] arr = { 0, 5, 8, 3,868,64,89,6 };
         int N = arr.length;
 
         // Function call

@@ -1,5 +1,4 @@
 public class DoublyLinkedList {
-
     class Node {
         int data;
         Node next;
